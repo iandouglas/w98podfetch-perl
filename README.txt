@@ -1,5 +1,6 @@
-README -  w98podfetch, http://w98podfetch.w98.us/
-v0.60 2005-11-04, Ian Douglas, w98podfetch@gmail.com
+README -  w98podfetch
+v0.60 2005-11-04, Ian Douglas
+ian.douglas@iandouglas.com, iandouglas736@gmail.com
 
 #[[[ TABLE OF CONTENTS
 - Introduction
