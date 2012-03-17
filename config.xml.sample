@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<!-- BASE configuration -->
+	<basedir>/usb/podcast/</basedir>
+	<makefolders>per podcast</makefolders>
+	<download order="newest" limit="10 MB" />
+	<m3upath>/podcast</m3upath>
+	<cutoffdate>2005-09-01</cutoffdate>
+	<!-- BASE configuration -->
+
+
+	<subscriptions>
+	<!-- each feed is encapsulated by <feed> and </feed> tags -->
+		<feed feedname="engadget" foldername="engadget" url="http://www.engadget.com/common/videos/pt/rss.xml">
+			<rename oldformat="" newformat="" />
+			<download order="newest" limit="1 file" skipold="no" />
+		</feed>
+
+		<feed feedname="croncast" foldername="croncast" url="http://www.croncast.com/wp-rss2.php">
+			<rename oldformat="" newformat="" />
+			<download order="newest" limit="" skipold="yes" />
+		</feed>
+
+		<feed feedname="todayinhistory" foldername="todayinhistory" url="http://mdattilo.audioblog.com/rss/tih.xml">
+			<rename oldformat="%s.%s" newformat="$name-$date.$ext" />
+			<download order="newest" limit="2 files" skipold="yes" />
+		</feed>
+
+		<feed feedname="twit" foldername="twit" url="http://leo.am/podcasts/twit">
+			<rename oldformat="" newformat="" />
+			<download order="newest" limit="1 files" skipold="yes" />
+		</feed>
+
+		<feed feedname="linuxq" foldername="LinuxQuestions" url="http://radio.linuxquestions.org/syndicate/lq.php">
+			<rename oldformat="" newformat="" />
+			<download order="newest" limit="" skipold="no" />
+		</feed>
+
+<!-- sample to cut and paste:
+		<feed feedname="" foldername="" url="">
+			<rename oldformat="" newformat="" />
+			<download order="newest" limit="" skipold="yes" />
+		</feed>
+-->
+
+	</subscriptions>
+</config>
+

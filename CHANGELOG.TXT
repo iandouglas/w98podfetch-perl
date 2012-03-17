@@ -1,0 +1,19 @@
+Changes in 0.61 from 0.60
+- non-buffered output by suggestion of a user
+- added a --debug option which will print copious amounts of debugging text;
+	handy to use when sending bug reports; likewise added lots of "if $debug"
+	checks throughout the code for printing this debug info; use in partner with
+	the --verbose flag
+- expanded the use of the --verbose flag in conjunction with the --debug
+	option.
+- added a cmdline flag for running a single podcast; see the usage for help on
+	using this flag with your configuration
+- rearranged how some of the code gets sorted to avoid bugs with feeds whose
+	enclosure descriptions contain certain characters
+- enabled the enclosure pubDate for date sorting
+- fixed a bug from mantis where a podcast url could contain regular expression
+	syntax and causing crashes
+- readme file contains information on setting w98podfetch as a Windows
+	service; many thanks to Mike who sent me the information. I didn't want to
+	publicize his Email address without his permission.
+
