@@ -84,8 +84,8 @@ markers made up of three left-square-brackets and three right-square-brackets
 the script itself to help me organize and collapse areas of what I'm working
 on. They can be safely removed if they're too annoying for you.
 
-#]]]
-#[[[ INTRODUCTION:
+## INTRODUCTION:
+
 This script is released as freeware to use/modify/copy/distribute any way you
 like as long as you give credit where it's due and understand that I provide
 absolutely NO warranty or guarantee whatsoever regarding this script or its
@@ -116,10 +116,9 @@ podcasts.
 This README file mostly describes the Perl script and how to manually build
 the XML configuration file or to use the online service to download podcast
 lists on the fly.
-#]]]
-#[[[ CONTACT/SUPPORT/REQUESTS:
-If you use w98podfetch, I'd love to hear from you, drop me a line at
-w98podfetch@gmail.com and include your city, state and country.
+
+## CONTACT/SUPPORT/REQUESTS:
+If you use w98podfetch, I'd love to hear from you, drop me an email and include your city, state and country.
 
 The web site has links to SourceForge where I have a public CVS repository set
 up, and also for forums and bug tracking as well as feature requests. You can
@@ -136,28 +135,23 @@ what errors (if any) you see on your screen. I may ask you to send me a copy
 of the script. I will provide *minimal* support where requested but if support
 issues become excessive, I may ask for a PayPal donation to cover my time.
 
-#]]]
-#[[[ REQUIREMENTS:
+## REQUIREMENTS:
 I've written and tested this script pretty much exclusively under Linux, and
 have had some documentation sent to me on how to run w98podfetch as a service
 in Windows, which I've included here.
 
 What you'll need are the following:
 
-Perl 5.6 or better, usually installed with common Linux distributions
-www.perl.com
-
-unix2dos
-This is used to convert m3u files from Unix format to DOS format so MP3
-players understand them properly.
-
-The following Perl libraries:
-- XML::Simple
-- Getopt::Long
-- HTTP::Request::Common
-- LWP::UserAgent
-- Date::Manip
-- String::Scanf
+- Perl 5.6 or better, usually installed with common Linux distributions
+- unix2dos  
+This is used to convert m3u files from Unix format to DOS format so MP3 players understand them properly.
+- The following Perl libraries:
+  - XML::Simple
+  - Getopt::Long
+  - HTTP::Request::Common
+  - LWP::UserAgent
+  - Date::Manip
+  - String::Scanf
 
 You can use Perl's CPAN interface or 'ppm' for ActivePerl to download these
 libraries.
@@ -183,34 +177,32 @@ using these Perl libraries, please drop me a line at the Email address at the
 top of this README file and I'll be sure to include a note in future
 releases.
 
-#]]]
-#[[[ INSTALLATION:
+## INSTALLATION:
 You can save this script wherever you have permission to write files. If
 you're working in a Linux/Unix environment, you will need to make the script
-executable using the 'chmod' utility, usually something like this will do:
-
-	chmod +x w98podfetch.pl
-	or
-	chmor 775 w98podfetch.pl
+executable using the 'chmod' utility, usually something like this will do:  
+`chmod +x w98podfetch.pl`  
+or  
+`chmod 775 w98podfetch.pl`
 
 The beauty of being written as a command-line tool is that the script could be
 run by 'cron' (a background task scheduler on Linux/Unix) or run manually.
 
 The software will search for a configuration file and fail if it doesn't find
-anything. Currently, it looks for files in this order:
+anything. Currently, it looks for files in this order:  
+`~/.w98podfetch/config.xml`
 
-~/.w98podfetch/config.xml
 This would be a directory named '.w98podfetch' (notice the dot at the
 beginning) in your home folder, and the config.xml file copied inside there.
 This will allow each user on the system to use a personalized confguration
 file.
 
-/etc/w98podfetch.xml
+`/etc/w98podfetch.xml`
 This would be more of a 'global' place to put it if you didn't want to clutter
 up your home folder with hidden-dotted directories. Every user on your system
 will use this file if they don't have a the config file mentioned above.
 
-/opt/w98podfetch/config.xml
+`/opt/w98podfetch/config.xml`
 This conforms to a better representation of a global configuration for your
 system, if you're the only one on the system.
 
@@ -222,106 +214,98 @@ configuration.
 Copy the config.xml.sample file to one of the three locations listed above, or
 you can use the --config command line switch to point to a different location.
 For example, if you copy config.xml.sample to /tmp/podcast.xml then you would
-run the script as:
-	/path/to/w98podfetch.pl --config=/tmp/podcast.xml
+run the script as:  
+`/path/to/w98podfetch.pl --config=/tmp/podcast.xml`
 
-#]]]
-#[[[ RUN-TIME OPTIONS
+## RUN-TIME OPTIONS
 w98podfetch has a number of command line switches that you can use that will
 modify how the script operates. Some switches require extra information, some
 just set internal flags.
 
---verbose
+`--verbose`
 	This switch will turn on extra output to your terminal/console and provide a
 	lot of extra detail you wouldn't otherwise see. When submitting a bug
 	report, I may ask you to do a 'verbose' output and send the text to me in an
-	Email for debugging.
+	Email for debugging.  
 	This can also be written as a shortened command: -v
 
---config
+`--config`
 	As mentioned above, the --config setting indicates to the script where to
 	find your configuration file. The option requires an extra string of
 	information, which is either a disk path to the configuration file on your
 	system, or the name of a preconfigured podcast list on the 'online' service.
-	To use the 'online' service, you must also include the --email option.
+	To use the 'online' service, you must also include the --email option.  
 	The shortened version of this command is -c
 
---email
+`--email`
 	To use the 'online' version of w98podfetch, where podcast lists can be
 	downloaded on-the-fly, you must register a (free) account at the web site
 	(http://w98podfetch.w98.us/) and use this option to pass the Email address
-	as an extra string of information.
+	as an extra string of information.  
 	The shortened version of this command is -e
 
---listpasswd
+`--listpasswd`
 	Some users on the 'online' service will generate a 'private' list of
 	podcasts, and have the option of password-protecting the list. In this case,
 	you will be notified that the list you're trying to download with the
 	--config option requires a password, so you must use the --listpasswd option
-	to pass that string to the 'online' server.
+	to pass that string to the 'online' server.  
 	The shortened version of this command is -l
 
---help
+`--help`
 	This command simply prints a simple help screen to the terminal/console to
 	give you a brief recap of this information.
 
--- debug
+`--debug`
 	This will output LOTS of debugging information. Use it with the --verbose
 	command.
 
---onepodcast=feedname
+`--onepodcast=feedname`
 	This will let you download a single podcast feed, by passing a case-
 	insensitive feedname from the configuration.
 
-Note that the --config, --email, and --listpasswd commands all use an equal
+Note that the `--config`, `--email`, and `--listpasswd` switches all use an equal
 sign when used in long form (--config=/path/to/file) but do NOT use an equal
 sign when used in the shortened form (-c /path/to/file). You can also mix and
 match when to use the long option name or the short option name, the script is
 smart enough to figure out what you mean.
-
 
 Examples:
 
 1. You have a config.xml file in a folder called .w98podfetch in your home
 directory (one of the default paths), and you just want to run the script
 using that configuration:
-
-	w98podfetch.pl
+`w98podfetch.pl`
 
 2. You have downloaded or built a configuration script called "blah.xml" in
 your /tmp/ folder, and want to use that configuration in verbose mode:
-
-	w98podfetch.pl --config=/tmp/blah.xml
-	or
-	w98podfetch.pl -c /tmp/blah.xml
+`w98podfetch.pl --config=/tmp/blah.xml`  
+or  
+`w98podfetch.pl -c /tmp/blah.xml`
 
 3. You have registered for a free account with the 'online' service, and want
 to download a configuration for Scott Sigler's podcast novels called
 'scottsigler' (an actual public list on the 'online' service that I personally
 created. Assume that your Email address is joesmith@gmail.com and that there
 is no list password:
-
-	w98podfetch.pl --email=joesmith@gmail.com --config=scottsigler
-	or
-	w98podfetch.pl -e joesmith@gmail.com -c scottsigler
+`w98podfetch.pl --email=joesmith@gmail.com --config=scottsigler`  
+or  
+`w98podfetch.pl -e joesmith@gmail.com -c scottsigler`
 
 4. You have registered as joesmith@gmail.com, and want to download an online
 podcast list called 'linuxgeek' that has a list password of 'penguin' and want
 to run in verbose mode:
-
-	w98podfetch.pl -e joesmith@gmail.com -c linuxgeek --listpasswd=penguin -v
-	or
-	w98podfetch.pl -e joesmith@gmail.com -c linuxgeek -l penguinjunkie -v
+`w98podfetch.pl -e joesmith@gmail.com -c linuxgeek --listpasswd=penguin -v`  
+or  
+`w98podfetch.pl -e joesmith@gmail.com -c linuxgeek -l penguinjunkie -v`
 
 5. If you have a podcast with a feedname of "mypodcast" and want to download
-ONLY that podcast like this:
+ONLY that podcast like this:  
+`w98podfetch.pl --onepodcast=mypodcast`  
+or  
+`w98podfetch.pl -o mypodcast`
 
-	w98podfetch.pl --onepodcast=mypodcast
-	or
-	w98podfetch.pl -o mypodcast
-
-#]]]
-#[[[ CONFIGURATION:
+## CONFIGURATION:
 In order to have w98podfetch.pl execute correctly, it needs to have an XML
 configuration file indicating things like disk paths.
 
@@ -343,7 +327,7 @@ myself and why I've created the 'online' interface.
 
 To get started, use the config.xml.sample file as a basis for what you want to
 do. Most people will simply need to change the disk paths at the beginning of
-the file, and copy-and-paste the the <feed></feed> blocks for new
+the file, and copy-and-paste the the `<feed></feed>` blocks for new
 subscriptions and modify the internal pieces.
 
 I'LL MENTION IT AGAIN: if you're not familiar with writing XML, it's probably
@@ -354,9 +338,12 @@ having to explain how to write XML.
 If you're really a do-it-yourself type of person, you can read more about
 writing XML at various web sites out there. Simply google for "how to write
 XML" and you'll see sites like this that look pretty good:
+
 http://www.c-sharpcorner.com/LearnXML/XMLSyntaxes.asp
+
 Note: I do not necessarily endorse that site or its content, it's just offered
 as an example of an XML tutorial.
+
 There are PLENTY of books out there on how to write XML, such as the "XML
 Bible" found at http://www.ibiblio.org/xml/books/bible/
 
@@ -364,33 +351,35 @@ Back to the configuration:
 
 There are two portions of the configuration file, the 'base' configuration and
 a series of 'feed' configurations. I'm explaining everything in this file so I
-don't clutter up the configuration file with a bunch of message <!-- -->
+don't clutter up the configuration file with a bunch of message `<!-- -->`
 comment markers (which still need to get parsed by the script).
 
-#[[[ Base Configuration
------
-Everything NOT in the <subscriptions></subscriptions> block is used for
+### Base Configuration
+
+Everything NOT in the `<subscriptions></subscriptions>` block is used for
 running the script. Generally speaking, you should only need to change a few
 disk paths for where you want the podcasts downloaded to, and the application
 will default to taking care of a lot of other details on your behalf.
 
-#[[[ <basedir></basedir>
+#### `<basedir></basedir>`
+
 This is the base directory for where you want your podcasts to be downloaded
 to. You must have read and write permissions on this folder. THE SCRIPT WILL
 NOT OPERATE IF THIS OPTION IS NOT SET! This folder name should be written as
 /home/joe or /home/joe/ - I have not tested the script with relative paths 
 like "../joe" so don't bug me for support if you try it and the script fails.
-	Example:
-		<basedir>/home/joe/</basedir>
 
-#]]]
-#[[[ <makefolders></makefolders>
+Example:  
+`<basedir>/home/joe/</basedir>`
+
+#### `<makefolders></makefolders>`
 'makefolders' instructs the application how to build folders within 'basedir'
 for each podcast file that gets downloaded. Personally, I find it easier to
 sort my podcasts into grouped folders, but wanted to give everyone the
 flexibility of their own taste. BashPodder, which influenced this application,
 built a new folder every day that their script was run and all podcast files
 downloaded that day were placed into that single folder.
+
 I give three options for how to create folders: create a folder based on the
 podcast feed configuration ('per podcast'), build a single folder for the day
 the application is run and put all files in that folder ('date-today') or to
@@ -402,29 +391,30 @@ now that I've built in m3u generation.
 
 Any folders created will be appended to 'basedir'
 
-	'per podcast' will make a folder for each podcast using its 'foldername'
-	attribute and put each downloaded file into that respective folder and 
-	is the default option if 'makefolders' is not set at all.
-	example: (these three examples are treated equal to 'per podcast')
-	<makefolders>per podcast</makefolders>
-	<makefolders></makefolders>
-	<makefolders />
+`per podcast` will make a folder for each podcast using its 'foldername'
+attribute and put each downloaded file into that respective folder and 
+is the default option if 'makefolders' is not set at all.
 
-	'date-today' will make a folder with today's date and download all files
-	into that folder.
-	example:
-	<makefolders>date-today</makefolders>
+example: (these three examples are treated equal to 'per podcast')
+- `<makefolders>per podcast</makefolders>`
+- `<makefolders></makefolders>`
+- `<makefolders />`
 
-	'date-all' will make a folder for every publication date of every downloaded file
-	For example, if 'basedir' is set to '/home/joe/', and 'makefolders' is set
-	to 'date-today', a folder will be created every day this script is run, and
-	will create a folder such as '/home/joe/2005-10-20/' when run on October 20,
-	2005.
-	example:
-	<makefolders>date-all</makefolders>
+`date-today` will make a folder with today's date and download all files into that folder.
 
-#]]]
-#[[[ <download order="" limit="" />
+example:
+- `<makefolders>date-today</makefolders>`
+
+`date-all` will make a folder for every publication date of every downloaded file
+For example, if 'basedir' is set to '/home/joe/', and 'makefolders' is set
+to 'date-today', a folder will be created every day this script is run, and
+will create a folder such as '/home/joe/2005-10-20/' when run on October 20, 2005.
+
+example:
+- `<makefolders>date-all</makefolders>`
+
+#### `<download order="" limit="" />`
+
 This tagset determines which order to fetch podcast files ('newest' or
 'oldest' first) and if/when to halt any podcast fetching based on a limitation
 imposed.
@@ -432,7 +422,7 @@ imposed.
 The 'order' attribute is either 'newest' or 'oldest' and will check the
 'pubDate' tag for each item or enclosure in the podcast feed to determine
 which order to actually download the files. If the feed does not have any
-pubDate listed in the <item> heirarchy at all, today's date is injected and
+pubDate listed in the `<item>` heirarchy at all, today's date is injected and
 the oldest/newest flag is ignored for that feed.
 
 The 'limit' attribute sets a preset limitation for any podcasts that do not
@@ -472,30 +462,32 @@ leave it blank.
 Example: impose a global setting for each podcast where oldest files should be
 downloaded first and that the application should attempt to download a maximum
 of 2 files per subscription:
-	<download order="oldest" limit="2 files">
+
+`<download order="oldest" limit="2 files">`
 
 Example: impose a global setting for each podcast where newest files should be
 downloaded first and that the application should stop downloading files if the
 next file fetched would exceed 25MB for this feed:
-	<download order="oldest" limit="25 MB">
+
+`<download order="oldest" limit="25 MB">`
 
 Example: impose a global setting for each podcast where newest files should be
 downloaded first, and that the application should attempt to download every
 file available in a subscription: (all three lines are the equivalent of
 downloading all files)
-	<download order="oldest" limit="all" />
-	<download order="oldest" limit="unlimited" />
-	<download order="oldest" limit="" />
+- `<download order="oldest" limit="all" />`
+- `<download order="oldest" limit="unlimited" />`
+- `<download order="oldest" limit="" />`
 
 PLEASE NOTE: the 'limit' attribute of the base configuration is not a
 cumulative limitation. I do have a future plan of a total cumulative download
 cap where you could specify "10 files" and the application will stop running
 once 10 total files have been downloaded from all of the podcasts.
 
-#]]]
-#[[[<m3upath></m3upath>
-If <makefolders> is set to "per podcast", an M3U playlist will be created
-inside the folder setting in <basedir> named as "podcast-YYYY-MM-DD.m3u". The
+#### `<m3upath></m3upath>`
+
+If `<makefolders>` is set to "per podcast", an M3U playlist will be created
+inside the folder setting in `<basedir>` named as "podcast-YYYY-MM-DD.m3u". The
 'm3upath' tag is a non-relative path which your MP3 player will use to start
 getting at podcast downloads that will be written as a standard M3U playlist
 file. For example, I mount my iRiver H320 as /usb/podcast on my linux
@@ -523,42 +515,43 @@ appending podcast files to that same file. So if you run the application at
 7am and download 10 files, and run it again at 5pm and download another 15
 files, all 25 files will be in the same M3U file.
 
-#]]]
-#[[[ <cutoffdate>YYYY-MM-DD</cutoffdate>
+#### `<cutoffdate>YYYY-MM-DD</cutoffdate>`
 If 'cutoffdate' contains a valid date string (preferably in YYYY-MM-DD format,
 but really, any date string that can be parsed by the Date::Manip library
 function "ParseDateString" will work including cool things like:
-YYYYMMDDHHMNSS 
-YYYYMMDDHHMNSS 
-YYYYMMDDHHMN 
-YYYYMMDDHH 
-YY-MMDDHHMNSS
-YY-MMDDHHMN
-YY-MMDDHH
-YYYYMMDD
-YYYYMM
-YYYY
-YY-MMDD
-etc, with or without dashes, it does its best to figure it all out. However,
-the Date::Manip library is even cooler in that it will figure out "today's"
+- YYYYMMDDHHMNSS 
+- YYYYMMDDHHMNSS 
+- YYYYMMDDHHMN 
+- YYYYMMDDHH 
+- YY-MMDDHHMNSS
+- YY-MMDDHHMN
+- YY-MMDDHH
+- YYYYMMDD
+- YYYYMM
+- YYYY
+- YY-MMDD
+- etc, with or without dashes, it does its best to figure it all out.
+
+However, the Date::Manip library is even cooler in that it will figure out "today's"
 date, and let you use relative strings like this:
-"last Friday"
-"2 weeks ago Friday"
-"last day of September"
-"first Sunday in June 2004"
-... check the 'man' page on Date::Manip for ParseDateString to see exactly how
+- "last Friday"
+- "2 weeks ago Friday"
+- "last day of September"
+- "first Sunday in June 2004"
+
+Check the 'man' page on Date::Manip for ParseDateString to see exactly how
 it all works, but I personally recommend setting the date string to YYYY-MM-DD
 format for simplicity.
+
 In verbose mode (use the --verbose or -v command line option) you sill get a
 printout of which url's are too old and thus skipped)
 
-#]]]
-#]]]
-#[[[ Subscription Configuration
+### Subscription Configuration
 This is where you define each podcast subscription. The XML block between
-which you define every feed is named <subscription></subscription>. Each
-individual podcast feed is encapsulated between <feed></feed> tags.
+which you define every feed is named `<subscription></subscription>`. Each
+individual podcast feed is encapsulated between `<feed></feed>` tags.
 Essentially, this portion of your XML file looks like this:
+```
 <subscriptions>
 	<feed feedname="" url="">
 		...
@@ -567,15 +560,18 @@ Essentially, this portion of your XML file looks like this:
 		...
 	</feed>
 </subscriptions>
+```
 
 Notice that the 'subscriptions' tag set contains everything else in between.
 Likewise, the 'feed' tag set will contain (encapsulate) everything else in
 between as well.
 
-#[[[ <feed feedname="" foldername="" url="">
+#### `<feed feedname="" foldername="" url="">`
+
 Each feed is defined with the following attributes:
 
-"feedname"
+`"feedname"`
+
 This is a unique name that will be used to create a separate folder for
 downloading new podcasts for this feed. It will be appended to 'basedir' from
 the basic configuration and should not contain relative links. For example, if
@@ -588,7 +584,8 @@ Note that duplicating the 'name' attribute for any podcast will result in the
 script overwriting any previous definitions with whatever is found later in
 the config file.
 
-"foldername"
+`"foldername"`
+
 The foldername is used to write podcast downloads into a foldername which is
 created as part of 'basedir' (defined in the Base Configuration). The
 foldername value does not have to be unique. For example, if you download a
@@ -598,21 +595,27 @@ podcast subscriptions will be written into the same folder. Note that this
 attribute is ONLY used if 'makefolders' in the Base Configuration is set to
 'per podcast'.
 
-"url"
+`"url"`
+
 This is a string value containing the fully-qualified url of the xml
 subscription RSS or XML feed to parse. This URL must point to a valid XML compliant
 i(preferably iTunes compatible) subscription feed, no exceptions.
 
-	Example:
-		<feed ... url="http://mdattilo.audioblog.com/rss/tih.xml">
+Example:
+`<feed ... url="http://mdattilo.audioblog.com/rss/tih.xml">`
+
 Keep in mind that because the configuration file is written in XML and parsed
 using XML::Simple, you may need to tweak your subscription feed if it contains
 special characters. The feed name *must* conform to XML standards. For
 example, a feed like this:
-	http://www.blah.com/feed/podcast.xml?a=123&b=234
+
+`http://www.blah.com/feed/podcast.xml?a=123&b=234`
+
 ... would be invalid, because '&' is a reserved character in XML. You would
 have to tweak the URL to replace '&' with '&amp;' like this:
-	http://www.blah.com/feed/podcast.xml?a=123&amp;b=234
+
+`http://www.blah.com/feed/podcast.xml?a=123&amp;b=234`
+
 This is fairly uncommon in the podcasts feeds I'm seeing so far, but it was
 worth mentioning just in case.
 
@@ -621,8 +624,8 @@ strip all whitespace, and non-numeric and non-alphabetic characters from the
 'feedname' value. For example, "Music News" would be renamed to "MusicNews"
 and "Tech Update @ 10pm" would be renamed to "TechUpdate10pm".
 
-#]]]
-#[[[ <rename oldformat="" newformat="" />
+#### `<rename oldformat="" newformat="" />`
+
 The application will examine 'oldformat' and 'newformat' to determine whether
 to change the name of a file after it has been downloaded. If you find that
 podcast files are named things like "show4.mp3" or "05-2005-10-27.mp3" which
@@ -642,71 +645,50 @@ to use any extracted piece, it's simply there to pull known data out of a
 filename.
 
 I built in some reserved 'newformat' tags to use:
-	$name
-	this value gets filled in using the 'feedname' attribute from the <feed> tag
+- `$name`  
+this value gets filled in using the 'feedname' attribute from the `<feed>` tag
 
-	$date
-	this value gets filled in with 'YYYY-MM-DD' of the publication date of the
-	donwloaded file; if a pubDate element isn't found in the subscription feed,
-	today's date is used instead.
+- `$date`  
+this value gets filled in with 'YYYY-MM-DD' of the publication date of the downloaded file; if a pubDate element isn't found in the subscription feed, today's date is used instead.
 
-	$datetime
-	this value gets filled in as above but as 'YYYY-MM-DD HHMM' to include the
-	24-hour clock time of the publication - handy if a podcast has multiple
-	files published on the same day.
+- `$datetime`  
+this value gets filled in as above but as 'YYYY-MM-DD HHMM' to include the 24-hour clock time of the publication - handy if a podcast has multiple files published on the same day.
 
-	$ext
-	this calue is filled in with the file extension of the original downloaded
-	file. I didn't want to assume that every podcast feed uses MP3 files, so
-	this will let you download MP3's, OGG's, torrents, PDF files, etc. without
-	worrying about renaming the file and messing up the file extension.
-
-	Example:
-		This 'tech geek' podcast always names their file show1.mp3, show2.mp3,
-		show3.mp3, etc. and we want to rename it to something easier to
-		understand:
-		<feed feedname="TechGeek" foldername="Tech" url="http://blah.com/rss">
-			<rename oldformat="show%d.mp3" newformat="$name-show $1.mp3" />
-			<download order="newest" limit="">
-		</feed>
-		This will help the script to strip the numeric value out of the filename
-		by using the '%d' marker, and fills in that number into the $1 value in
-		the 'newformat' attribute. This example assumes that every podcast file
-		from this feed is an MP3 file. The new filename will look something like
-		"TechGeek-show 3.mp3"
-		This example will also move all downloaded files into a folder called
-		'Tech' and will use the global download limits from the base
-		configuration.
-
-	Example:
-		This 'money news' podcast always names their files like
-		"10-18-2005-Episode12-InterviewWithJoeTaxman.mp3" or
-		"10-19-2005-Episode13-UsefulInvestingInfo.pdf" and we want to make the
-		files easier to understand at a glance:
-		<feed feedname="MoneyNews" foldername="Finances" url="http://money.org/rss">
-		  <rename oldformat="%d-%d-%d-Episode%d-%s.%s" newformat="$name-$date,$4.$ext" />
-		</feed>
-		This will help the script to strip the date into individual pieces, 
-		episode number, and subsequent string description, as well as the file
-		extension. The new filename would look something like
-		"MoneyNews-2005-10-17,InterviewWithJowTaxman.mp3" or
-		"MoneyNews-2005-10-18,UsefulInvestingInfo.pdf"
-		Note that in this example, we could have used $6 for the file extension,
-		but we used the reserved $ext value instead.
+- `$ext`  
+  this value is filled in with the file extension of the original downloaded file. I didn't want to assume that every podcast feed uses MP3 files, so this will let you download MP3's, OGG's, torrents, PDF files, etc. without worrying about renaming the file and messing up the file extension.
+ - Example: This 'tech geek' podcast always names their file show1.mp3, show2.mp3, show3.mp3, etc. and we want to rename it to something easier to understand:
+```
+<feed feedname="TechGeek" foldername="Tech" url="http://blah.com/rss">
+	<rename oldformat="show%d.mp3" newformat="$name-show $1.mp3" />
+	<download order="newest" limit="">
+</feed>
+```
+ - This will help the script to strip the numeric value out of the filename by using the '%d' marker, and fills in that number into the $1 value in the 'newformat' attribute. This example assumes that every podcast file from this feed is an MP3 file. The new filename will look something like "TechGeek-show 3.mp3"
+ - This example will also move all downloaded files into a folder called 'Tech' and will use the global download limits from the base configuration.
+ - Example: This 'money news' podcast always names their files like "10-18-2005-Episode12-InterviewWithJoeTaxman.mp3" or "10-19-2005-Episode13-UsefulInvestingInfo.pdf" and we want to make the files easier to understand at a glance:
+```
+<feed feedname="MoneyNews" foldername="Finances" url="http://money.org/rss">
+  <rename oldformat="%d-%d-%d-Episode%d-%s.%s" newformat="$name-$date,$4.$ext" />
+</feed>
+```
+ - This will help the script to strip the date into individual pieces,  episode number, and subsequent string description, as well as the file extension. The new filename would look something like "MoneyNews-2005-10-17,InterviewWithJowTaxman.mp3" or  "MoneyNews-2005-10-18,UsefulInvestingInfo.pdf". Note that in this example, we could have used $6 for the file extension, but we used the reserved $ext value instead.
 
 Note that the oldformat string can simply be "%s" if you want to prefix the
 filename with the feedname or publication date of the file. For example, if a
 podcast has a nicely formatted filename of "Episode 18.mp3" and you simply
 want to prefix the filename with the name of the podcast, you could use
 something like this:
-	<feed feedname="New Music" foldername="Music" url="http://music.net/podcast">
-	  <rename oldformat="%s" newformat="$name, $1" />
+```
+<feed feedname="New Music" foldername="Music" url="http://music.net/podcast">
+  <rename oldformat="%s" newformat="$name, $1" />
+```
+
 This will take the *entire* filename, including the file extension, and use it
 as $1 in the newformat string. We prefix the filename, then, with the
 feedname, so the new filename would look like "NewMusic, Episode 18.mp3"
 
-#]]]
-#[[[ <download order="" limit="" skipold="" />
+#### `<download order="" limit="" skipold="" />`
+
 The 'order' attribute works the same was as the base configuration, and is
 given here as an override for each individual feed. For example, the base configuration
 may be set so the 'order' is 'newest' (which makes sense, you typically want to download
@@ -715,8 +697,7 @@ to download older files (earlier chapters) first. Remember, if no publication
 date is given for a podcast file, today's date is used as the publication
 date, and that could mess up the ordering of the files when sorting in
 oldest/newest modes.
-	Example
-		<download order="oldest" ... />
+- Example: `<download order="oldest" ... />`
 
 The 'limit' attribute works just like the base configuration limit flag.
 However, in this case, you could leave the 'base' configuration to a blank
@@ -740,10 +721,8 @@ podcasts this week will get downloaded. But say you just added a new
 subscription, and you *want* to get a backlog of podcasts - simply set
 "skipold" to "no" and the application will fetch older files for you.
 
-#]]]
-#]]]
-#]]]
-#[[[ LOGGING
+## LOGGING
+
 A log file for each podcast feed is kept in the destination folder when
 running with the base configuration of makefolders="per podcast".
 
@@ -766,25 +745,21 @@ date-all), no log file will be stored, and no file detection will be done.
 This is a current limitation on the application that I hope to fix at some
 point in the future.
 
-#]]]
-#[[[ FUTURE PLANS
+## FUTURE PLANS
 Future plans, feature requests, etc., can be found at http://iandouglas.com
 Feel free to submit feature requests in the forums or Mantis bug tracker at my
 site.
 
-More command-line options
-I'd love a cmdline option for just checking the configuration file for
+More command-line options. I'd love a cmdline option for just checking the configuration file for
 completeness, and maybe checking that each podcast URL is valid (and
 downloadable)
 
-#]]]
-#[[[ KNOWN BUGS
+## KNOWN BUGS
 No software is perfect. If you find a bug, or more importantly a podcast feed
 that doesn't work with the software, PLEASE submit a bug report through the
 w98podfetch web site.
 
-#]]]
-#[[[ THANKS
+## THANKS
 Thanks to my wife for putting up with my geek tendancies which flare up from
 time to time unexpectedly and I spend hours and hours working on something
 like this.
@@ -800,11 +775,11 @@ And, speaking of giving credit where it's due:
 
 This script was a major rewrite of bashpodder which is a bash shell script
 found at http://bashpodder.sourceforge.net/
+
 When I saw the limitations of bashpodder and the flexibility I knew I could
 write into it, I decided to write a similar script from scratch using Perl to
 download and manage my podcast collection.
+
 Credit and kudos to the guys that wrote that script, and to some of their
 contributors from whom I've borrowed ideas. Thanks for making your application
 open-source and free to download.
-
-#]]]
