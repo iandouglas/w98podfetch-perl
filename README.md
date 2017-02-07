@@ -1,3 +1,66 @@
+## What is w98podfetch?
+
+w98podfetch is a Perl script I wrote in 2005 that will manage and download podcast subscriptions.
+It is designed to be simple enough to run at the command line or via a cron job. If you have no idea
+what "command line" or "cron job" means or don't use Linux, this application is probably too advanced
+for you unless I convince myself to write a graphical interface for Xwindows or MS Windows.
+
+But if you're advanced enough to use Perl under Windows (using ActiveState/ActivePerl) then you can
+set w98podfetch as a system service to schedule downloads.
+
+### What are some features of w98podfetch?
+
+- online podcast subscription list (to be released with v0.6) so you don't have to mess with the XML configurations if you don't want to
+- download a subscription in newest-to-oldest or oldest-to-newest publication date order (handy for podcast series and audiobooks)
+- download a subscription in smallest-to-biggest or biggest-to-smallest filesize order
+- add limitations to stop downloading a subscription feed after a number of files, or before a certain byte count would be exceeded.
+- set a cut-off date so podcast files older than a certain date will never be downloaded
+
+### Sounds neat, where can I get a copy of w98podfetch?
+
+The latest version (v0.61) can be found on [GitHub](https://github.com/iandouglas/w98podfetch-perl).
+
+### What is the "w98podfetch online" service that I've read about?
+
+w98podfetch online was an online service I created to let users of w98podfetch share their podcast lists with others.
+Users were able to build a public list of favorite podcasts, and then give that list a name. Then, by sharing that list with
+other w98podfetch users, they can enjoy the same podcasts you listen to!
+
+The search engine was pretty robust, but I no longer maintain that site any longer.
+
+### You said the software does *this* but it does *that* instead, how come?
+
+If the software does something differently than I claim it should, then you've probably found a bug. Please contact me with
+as much information as you can, and include what Operating System you use (Ubuntu Linux, Debian Linux, Mac OS X, Windows XP SP2,
+and so on), and please let me know which version of w98podfetch you're using.
+
+### I thought of a really great feature to include in w98podfetch! How do I let you know?
+
+Open an issue at GitHub or better yet make a pull request.
+
+### I'm having trouble getting the software to run, but I don't think it's a bug. How do I get technical support for this software?
+
+You can open an issue on GitHub, but I'm not likely to fix it.
+
+### Is there a log of changes between versions?
+
+For versions between 0.v50 and 0.60, the best history will be the SourceForge CVS history, as there is no "changelog" file
+included in the tarball (yet). From v0.61 on, I will be including a CHANGELOG.txt file, outlining and detailing in there
+what has changed between the versions.
+
+### Any known issues?
+
+Nothing major, but no software is perfect. And I've only tested the code on Gentoo 2005 Linux, and Ubuntu 5.10 and 7.04.
+I've also received instructions from one user named Mike who set up w98podfetch on his Windows XP machine to run as a "service",
+and I've outlined his instructions in the latest README to give him credit for his help.
+
+
+
+---
+
+below is the original README.txt that was included in the download
+
+
 README -  w98podfetch
 v0.60 2005-11-04, Ian Douglas
 ian.douglas@iandouglas.com, iandouglas736@gmail.com
