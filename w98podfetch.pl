@@ -33,7 +33,7 @@ my $M3Upath ;
 my $ONEPODCAST ;
 
 my $today = UnixDate("today","%Y-%m-%d") ;
-my $ua = new LWP::UserAgent ;
+my $ua = LWP::UserAgent->new(ssl_opts => { verify_hostname => 1 }) ;
 $ua->agent("w98podfetch/$version") ;
 
 # set to 0 to do everything but actually download the file
@@ -72,7 +72,7 @@ if (defined($cmdopts{'email'})) {
 			$feedurl .= "&passwd=".$cmdopts{'listpasswd'} ;
 		}
 		print &ts()."connecting to $feedurl\n" if ($VERBOSE) ;
-		my $res = $ua->request(GET "$feedurl") ;
+		my $res = $ua->get("$feedurl") ;
 		if ($res->is_success) {
 			#print "content:\n-----\n".$res->content."\n-----\n" ;
 			if ($res->content =~ /requires a password/i) {
@@ -283,6 +283,12 @@ sub process_feed #[[[
 					$podcastsize = getpodcastsize($podcasturl) ;
 					print translatesize($podcastsize)."\n" if ($DEBUG) ;
 				}
+        if ($DEBUG) {
+          print "limit_t: $limit_t\n";
+          print "bytes so far: $bytessofar\n";
+          print "podcast size: $podcastsize\n";
+          print "limit_q: $limit_q\n";
+        }
 				if ($limit_t eq "bytes" && (($bytessofar+$podcastsize)>$limit_q)) {
 					print STDERR "\n***Info: Downloading $podcasturl would exceed your byte limitation, skipping rest of feed.\n" ;
 					$skiprest = 1 ;
@@ -319,7 +325,7 @@ sub process_feed #[[[
 				print "==> $podcasturl\n" if ($VERBOSE && !$DEBUG) ;
 			} #]]]
 		} #]]]
-		if (!$skiprest) {
+		#if (!$skiprest) {
 			#[[[ initial sort will put the array in oldest/smallest order
 			@filelist = sort(@filelist) ;
 			if ($feedorder eq "newest" || $feedorder eq "biggest") {
@@ -433,7 +439,7 @@ sub process_feed #[[[
 					print &ts()."<== fetching >>>$podcasturl<<< ($podcastTsize)\n" if ($VERBOSE) ;
 					print "x" if (!$VERBOSE) ;
 					$podcasturl = &correct_url($podcasturl) ;
-					my $res2 = $ua->request(GET "$podcasturl") ;
+					my $res2 = $ua->get("$podcasturl") ;
 					if ($res2->is_success) {
 						$outputfile =~ tr/+/ / ;
 						$outputfile =~ s/%([a-fA-F0-9]{2,2})/chr(hex($1))/eg ;
@@ -451,6 +457,7 @@ sub process_feed #[[[
 							print PODLOG "\n" ;
 							close(PODLOG) ;
 						} else {
+              print PODLOG &ts().$res2."\n";
 							print &ts()."***Warning, could not append to ".$GLOBAL{'logdir'}."/$feedname.log\n" ;
 						}
 						$fetched++ ;
@@ -486,12 +493,15 @@ sub process_feed #[[[
 					print "($size)\n" ;
 				}
 			}
-		} else {
-			last ;
-		}
+		#} else {
+		#	last ;
+		#}
 	} else {
 		print STDERR "\n" if (!$VERBOSE) ;
-		print "***Error: subscription feed named '$feedname' has an invalid feed url (404 error)\n" ;
+		print "***Error: subscription feed named '$feedname' had an error:\n";
+    print $res->as_string ."\n";
+    print $res->status_line ."\n";
+    print $res->message ."\n";
 	}
 }#]]]
 sub add2m3u #[[[
@@ -700,29 +710,28 @@ sub Usage #[[[
 	chomp($scriptname) ;
 	print <<__EOT__;
 	Typical Usage:
-		$scriptname [--email=email] [--config=config.xml] [--listpasswd] 
+		$scriptname [--email=email] [--config=config.xml] [--listpasswd]
 		            [--verbose] [--help] [--onepodcast=feedname]
 
-		If --email is used, the application will attempt to connect to 
+		If --email is used, the application will attempt to connect to
 		w98podfetch's online database, and the --config option becomes mandatory,
 		and must include the name of the confguration to download. If the list
 		configuration you're downloading is protected by a password, you must also
-		pass --listpasswd and send the proper case-sensitive password. The Email 
+		pass --listpasswd and send the proper case-sensitive password. The Email
 		address passed as the 'email' parameter but be a valid registered user at
 		'w98podfetch online'.
 
-		If you are using a local configuration file which lives somewhere other 
-		than the default directories (see docs for details), you must pass the 
+		If you are using a local configuration file which lives somewhere other
+		than the default directories (see docs for details), you must pass the
 		--config option to tell the script where to find your configuration file.
 		Without it, the script will not run.
 
 		Verbose mode simply prints more debugging information to the screen.
 
-		'onepodcast' mode will let you download the files from only a single 
+		'onepodcast' mode will let you download the files from only a single
 		podcast, based on the 'feedname' of the podcast in the configuration.
 
 		Help mode prints this message.
 
 __EOT__
 }#]]]
-
