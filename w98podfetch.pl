@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 # w98podfetch.pl
-# Ian Douglas, w98podfetch@gmail.com, http://w98podfetch.w98.us/
+# Ian Douglas
 # Free license to use/modoify/copy/distribute this script, just give credit
 # where it's due
 # PLEASE read the README.txt file ... there's probably very little you'll ever
