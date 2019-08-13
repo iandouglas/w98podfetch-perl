@@ -1,0 +1,14 @@
+HTTP/2 200 
+server: Apache/2.4.25 (Debian)
+x-powered-by: PHP/7.2.14-1+0~20190113100742.14+stretch~1.gbpd83c69
+x-served-by: prod-web-9
+x-content-type-options: nosniff
+x-xss-protection: 1; mode=block
+referrer-policy: no-referrer-when-downgrade
+strict-transport-security: max-age=604800; includeSubDomains
+x-frame-options: SAMEORIGIN
+content-type: text/xml;charset=UTF-8
+cache-control: max-age=0
+expires: Tue, 13 Aug 2019 21:02:08 GMT
+date: Tue, 13 Aug 2019 21:02:08 GMT
+

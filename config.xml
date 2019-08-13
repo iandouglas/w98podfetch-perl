@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+<basedir>/Users/id/podcasts</basedir>
+<makefolders>per podcast</makefolders>
+<download order="newest" limit="300 MB" />
+<m3upath>/Users/id/podcasts/m3u</m3upath>
+<cutoffdate>2019-08-10</cutoffdate>
+<logdir>/Users/id/podcasts/log</logdir>
+
+
+<subscriptions>
+<feed feedname="PlanetMoney" foldername="PlanetMoney" url="https://www.npr.org/rss/podcast.php?id=510289">
+<rename oldformat="" newformat="" />
+<download order="newest" limit="" skipold="no" />
+</feed>
+
+</subscriptions>
+</config>

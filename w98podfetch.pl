@@ -248,7 +248,8 @@ sub process_feed #[[[
 	} #]]]
 
 # fetch feed list:
-	my $res = $ua->request(GET "$feedurl") ;
+  print "feed url: >$feedurl<\n" if ($DEBUG);
+	my $res = $ua->get($feedurl) ;
 	if ($res->is_success) {
 		my $feedlist = $res->content ;
 		my $feedxml = $xml->XMLin($feedlist, forcearray => ['item','enclosure'] ) ;
